@@ -1,0 +1,12 @@
+{
+    "name": "roave/psalm-html-output",
+    "description": "Psalm HTML Output",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "James Titcumb",
+            "email": "james@asgrim.com"
+        }
+    ]
+}
