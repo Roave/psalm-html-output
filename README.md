@@ -11,5 +11,5 @@ Then `composer require --dev roave/paslm-html-output` (note: not yet set up)
 ## Usage
 
 ```bash
-vendor/bin/psalm --output-format=xml | xsltproc psalm.xsl - > psalm-report.html
+vendor/bin/psalm --output-format=xml | xsltproc psalm-html-output.xsl - > psalm-report.html
 ```
