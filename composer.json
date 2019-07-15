@@ -8,5 +8,13 @@
             "name": "James Titcumb",
             "email": "james@asgrim.com"
         }
-    ]
+    ],
+    "scripts": {
+        "post-install-cmd": [
+            "which xsltproc"
+        ],
+        "post-update-cmd": [
+            "which xsltproc"
+        ]
+    }
 }
