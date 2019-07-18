@@ -9,4 +9,4 @@ jobs:
           name: "Test generated report against snapshot"
           command: |
             test/generate-test-report.sh
-            diff test/psalm-report.html test/psalm-report-generated.html
+            diff -s test/psalm-report.html test/psalm-report-generated.html
