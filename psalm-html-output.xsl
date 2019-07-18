@@ -82,11 +82,17 @@ Psalm XML to HTML renderer
                 <script type="text/javascript">
                 <![CDATA[
                     Prism.hooks.add('before-insert', function(env) {
-                        // Note; "higlighting" is problematic due to regex/html nonsense
-                        //env.highlightedCode = env.highlightedCode.replace(/##\(##([\w\W]*)##\)##/gs, 'HERE<span class="psalm-errored-code">$1</span>THERE');
-                        // Alternate approach is to indicate with raquo/laquo for now...
-                        env.highlightedCode = env.highlightedCode.replace(/##\(##/g, '<span class="psalm-errored-code">&#187;&#187;&#187;</span>');
-                        env.highlightedCode = env.highlightedCode.replace(/##\)##/g, '<span class="psalm-errored-code">&#171;&#171;&#171;</span>');
+                        const magicTagMatch = /\/\*\*##\(##\*\*\/([\w\W]*)\/\*\*##\)##\*\*\//gs;
+                        const matchedCodeToBecomeRed = magicTagMatch.exec(env.highlightedCode);
+                        let codeToBecomeRed = matchedCodeToBecomeRed[1];
+
+                        // Fairly naive assumption that PrismJS only uses </span> and <span class="..."> to highlight...
+                        codeToBecomeRed = codeToBecomeRed.replace(/(<\/span>)/g, '</span>$1');
+                        codeToBecomeRed = codeToBecomeRed.replace(/(<span class="[^"]*">)/g, '$1<span class="psalm-errored-code">');
+
+                        codeToBecomeRed = '<span class="psalm-errored-code">' + codeToBecomeRed + '</span>';
+
+                        env.highlightedCode = env.highlightedCode.replace(magicTagMatch, codeToBecomeRed);
                     });
                     function subtractUnmatchedItems(filterType, filterValue) {
                         var items = document.querySelectorAll('#psalmErrors > li');
@@ -157,7 +163,7 @@ Psalm XML to HTML renderer
             </ul>
             <p><xsl:value-of select="message"/></p>
             <pre data-start='{line_from}' class="line-numbersx">
-                <code class="language-php"><xsl:value-of select="substring(snippet, 0, from - snippet_from + 1)" />##(##<xsl:value-of select="substring(snippet, from - snippet_from + 1, to - from)" />##)##<xsl:value-of select="substring(snippet, to - snippet_from + 1)" /></code>
+                <code class="language-php"><xsl:value-of select="substring(snippet, 0, from - snippet_from + 1)" />/**##(##**/<xsl:value-of select="substring(snippet, from - snippet_from + 1, to - from)" />/**##)##**/<xsl:value-of select="substring(snippet, to - snippet_from + 1)" /></code>
             </pre>
         </li>
     </xsl:template>
