@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report>
+    <item>
+        <severity>error</severity>
+        <line_from>18</line_from>
+        <line_to>18</line_to>
+        <type>InvalidScalarArgument</type>
+        <message>Argument 1 of __construct expects string, int provided</message>
+        <file_name>src/Reflector/Exception/IdentifierNotFound.php</file_name>
+        <file_path>/full/path/to/better-reflection/src/Reflector/Exception/IdentifierNotFound.php</file_path>
+        <snippet>        parent::__construct($message);</snippet>
+        <selected_text>$message</selected_text>
+        <from>392</from>
+        <to>400</to>
+        <snippet_from>364</snippet_from>
+        <snippet_to>402</snippet_to>
+        <column_from>29</column_from>
+        <column_to>37</column_to>
+    </item>
+    <item>
+        <severity>error</severity>
+        <line_from>30</line_from>
+        <line_to>34</line_to>
+        <type>InvalidScalarArgument</type>
+        <message>Argument 1 of Roave\BetterReflection\Reflector\Exception\IdentifierNotFound::__construct expects int, string provided</message>
+        <file_name>src/Reflector/Exception/IdentifierNotFound.php</file_name>
+        <file_path>/full/path/to/better-reflection/src/Reflector/Exception/IdentifierNotFound.php</file_path>
+        <snippet>        return new self(sprintf(
+            '%s "%s" could not be found in the located source',
+            $identifier-&gt;getType()-&gt;getName(),
+            $identifier-&gt;getName()
+            ), $identifier);</snippet>
+        <selected_text>sprintf(
+            '%s "%s" could not be found in the located source',
+            $identifier-&gt;getType()-&gt;getName(),
+            $identifier-&gt;getName()
+            )</selected_text>
+        <from>651</from>
+        <to>815</to>
+        <snippet_from>627</snippet_from>
+        <snippet_to>830</snippet_to>
+        <column_from>25</column_from>
+        <column_to>10</column_to>
+    </item>
+</report>
