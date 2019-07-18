@@ -13,3 +13,17 @@ Then `composer require --dev roave/psalm-html-output`
 ```bash
 vendor/bin/psalm --output-format=xml | xsltproc psalm-html-output.xsl - > psalm-report.html
 ```
+
+## Run with Docker
+
+To avoid having to install `xsltproc` if you already have Docker, first build the image with:
+
+```bash
+docker build . -t psalm-html-output:latest
+```
+
+Then to generate the HTML:
+
+```bash
+vendor/bin/psalm --output-format=xml | docker run --rm -i psalm-html-output:latest > psalm-report.html
+```
