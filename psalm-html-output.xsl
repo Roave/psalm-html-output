@@ -22,7 +22,7 @@ Psalm XML to HTML renderer
                       font-size: 1em;
                     }
                     code[class*="language-"] .psalm-errored-code {
-                        background-color: red;
+                        background-color: #ce5353;
                         color: white;
                         text-shadow: none;
                     }
