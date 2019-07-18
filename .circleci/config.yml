@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: "Test generated report against snapshot"
+          command: |
+            test/generate-test-report.sh
+            diff test/psalm-report.html test/psalm-report-generated.html
