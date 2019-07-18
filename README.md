@@ -2,6 +2,8 @@
 
 Takes the XML output from [Psalm](https://psalm.dev/) and renders it as HTML.
 
+[![CircleCI](https://circleci.com/gh/Roave/psalm-html-output/tree/master.svg?style=svg)](https://circleci.com/gh/Roave/psalm-html-output/tree/master)
+
 ## Installation
 
 First, install `xsltproc` on your machine (for example, `apt install xsltproc`).
