@@ -1,0 +1,133 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Psalm Report</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/themes/prism.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet">
+<style>
+                    html {
+                        font-family: sans-serif;
+                    }
+                    pre > code.language-php {
+                      font-size: 1em;
+                    }
+                    code[class*="language-"] .psalm-errored-code {
+                        background-color: red;
+                        color: white;
+                        text-shadow: none;
+                    }
+                    ul.tags {
+                        padding: 0;
+                        margin: 0;
+                        font-size: 0.9em;
+                    }
+                    ul.tags li {
+                        display: inline;
+                        background-color: #e5e6d9;
+                        padding: 3px 5px;
+                        border-radius: 5px;
+                        text-shadow: 0 1px white;
+                        margin-right: 10px;
+                    }
+                    .severity {
+                        text-transform: lowercase;
+                    }
+                    .severity.error {
+                        color: #ff0000;
+                    }
+                    .severity.warning {
+                        color: #ff6e00;
+                    }
+                    .severity.info {
+                        color: #0079ff;
+                    }
+                    ul#psalmErrors li.hidden {
+                        display: none;
+                    }
+                </style>
+</head>
+<body>
+<form><label><select class="filterable" data-filter-type="severity"><option value="">-- show all --</option></select><select class="filterable" data-filter-type="psalm-type"><option value="">-- show all --</option></select></label></form>
+<ul id="psalmErrors">
+    <li data-severity="error" data-psalm-type="InvalidScalarArgument">
+<h3>src/Reflector/Exception/IdentifierNotFound.php:18</h3>
+<ul class="tags">
+<li class="severity error">error</li>
+<li>InvalidScalarArgument</li>
+</ul>
+<p>Argument 1 of __construct expects string, int provided</p>
+<pre data-start="18" class="line-numbersx"><code class="language-php">        parent::__construct(##(##$message##)##);</code></pre>
+</li>
+    <li data-severity="error" data-psalm-type="InvalidScalarArgument">
+<h3>src/Reflector/Exception/IdentifierNotFound.php:30</h3>
+<ul class="tags">
+<li class="severity error">error</li>
+<li>InvalidScalarArgument</li>
+</ul>
+<p>Argument 1 of Roave\BetterReflection\Reflector\Exception\IdentifierNotFound::__construct expects int, string provided</p>
+<pre data-start="30" class="line-numbersx"><code class="language-php">        return new self(##(##sprintf(
+            '%s "%s" could not be found in the located source',
+            $identifier-&gt;getType()-&gt;getName(),
+            $identifier-&gt;getName()
+         ##)##   ), $identifier);</code></pre>
+</li>
+</ul>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/components/prism-markup-templating.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/components/prism-php.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script type="text/javascript">
+                
+                    Prism.hooks.add('before-insert', function(env) {
+                        // Note; "higlighting" is problematic due to regex/html nonsense
+                        //env.highlightedCode = env.highlightedCode.replace(/##\(##([\w\W]*)##\)##/gs, 'HERE<span class="psalm-errored-code">$1</span>THERE');
+                        // Alternate approach is to indicate with raquo/laquo for now...
+                        env.highlightedCode = env.highlightedCode.replace(/##\(##/g, '<span class="psalm-errored-code">&#187;&#187;&#187;</span>');
+                        env.highlightedCode = env.highlightedCode.replace(/##\)##/g, '<span class="psalm-errored-code">&#171;&#171;&#171;</span>');
+                    });
+                    function subtractUnmatchedItems(filterType, filterValue) {
+                        var items = document.querySelectorAll('#psalmErrors > li');
+
+                        for (var i = 0; i < items.length; i++) {
+                            var itemTag = items[i].getAttribute('data-' + filterType);
+
+                            if (filterValue !== '' && itemTag !== filterValue) {
+                                items[i].setAttribute('class', 'hidden');
+                            }
+                        }
+                    }
+                    function showAllItems() {
+                        var items = document.querySelectorAll('#psalmErrors > li');
+
+                        for (var i = 0; i < items.length; i++) {
+                            items[i].setAttribute('class', '');
+                        }
+                    }
+                    document.querySelectorAll('.filterable').forEach(function (itemToApplyClickHandlerTo) {
+
+                        var foundItems = [];
+                        var filterType = itemToApplyClickHandlerTo.getAttribute('data-filter-type');
+                        var items = document.querySelectorAll('#psalmErrors > li');
+                        for (var i = 0; i < items.length; i++) {
+                            foundItems.push(items[i].getAttribute('data-' + filterType));
+                        }
+                        foundItems = foundItems.filter(function (value, index, self) {
+                            return self.indexOf(value) === index;
+                        });
+                        for (var i = 0; i < foundItems.length; i++) {
+                            var newOpt = document.createElement('option');
+                            newOpt.value = foundItems[i];
+                            newOpt.innerHTML = foundItems[i];
+                            itemToApplyClickHandlerTo.appendChild(newOpt);
+                        }
+
+                        itemToApplyClickHandlerTo.onclick = function () {
+                            showAllItems();
+                            document.querySelectorAll('.filterable').forEach(function (filteringDropdown) {
+                                subtractUnmatchedItems(
+                                    filteringDropdown.getAttribute('data-filter-type'),
+                                    filteringDropdown.options[filteringDropdown.selectedIndex].value
+                                );
+                            });
+                        };
+                    });
+                
+                </script>
+</body>
+</html>
