@@ -13,7 +13,7 @@ Then `composer require --dev roave/psalm-html-output`
 ## Usage
 
 ```bash
-vendor/bin/psalm --output-format=xml | xsltproc psalm-html-output.xsl - > psalm-report.html
+vendor/bin/psalm --output-format=xml | xsltproc vendor/roave/psalm-html-output/psalm-html-output.xsl - > psalm-report.html
 ```
 
 ## Run with Docker
