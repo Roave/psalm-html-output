@@ -2,7 +2,7 @@
 
 Takes the XML output from [Psalm](https://psalm.dev/) and renders it as HTML.
 
-![Build](https://github.com/Roave/psalm-html-output/workflows/Test%20Output%20Generation%20Matches%20Expectations/badge.svg)
+![Build](https://github.com/Roave/psalm-html-output/workflows/Build/badge.svg)
 
 ## Installation
 
