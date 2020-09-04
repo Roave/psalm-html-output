@@ -1,4 +1,4 @@
-FROM ubuntu:19.04
+FROM ubuntu:20.04
 
 RUN set -xeu && \
     IFS=$'\n\t' && \
