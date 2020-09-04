@@ -2,7 +2,7 @@
 
 Takes the XML output from [Psalm](https://psalm.dev/) and renders it as HTML.
 
-[![CircleCI](https://circleci.com/gh/Roave/psalm-html-output/tree/master.svg?style=svg)](https://circleci.com/gh/Roave/psalm-html-output/tree/master)
+![Build](https://github.com/Roave/psalm-html-output/workflows/Test%20Output%20Generation%20Matches%20Expectations/badge.svg)
 
 ## Installation
 
