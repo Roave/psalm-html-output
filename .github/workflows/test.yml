@@ -1,0 +1,21 @@
+name: "Build"
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  test:
+    name: "Test Output Generation"
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v2"
+
+      - name: "Generate test report"
+        run: test/generate-test-report.sh
+
+      - name: "Verify generated HTML matches expectations"
+        run: diff -s test/psalm-report.html test/psalm-report-generated.html

@@ -47,7 +47,7 @@
                 </style>
 </head>
 <body>
-<form><label><select class="filterable" data-filter-type="severity"><option value="">-- show all --</option></select><select class="filterable" data-filter-type="psalm-type"><option value="">-- show all --</option></select></label></form>
+<section><h1>Total violations: 2</h1></section><form><label><select class="filterable" data-filter-type="severity"><option value="">-- show all --</option></select><select class="filterable" data-filter-type="psalm-type"><option value="">-- show all --</option></select></label></form>
 <ul id="psalmErrors">
     <li data-severity="error" data-psalm-type="InvalidScalarArgument">
 <h3>src/Reflector/Exception/IdentifierNotFound.php:18</h3>
@@ -104,16 +104,23 @@
                         var foundItems = [];
                         var filterType = itemToApplyClickHandlerTo.getAttribute('data-filter-type');
                         var items = document.querySelectorAll('#psalmErrors > li');
+                        var uniqueCounts = [];
                         for (var i = 0; i < items.length; i++) {
-                            foundItems.push(items[i].getAttribute('data-' + filterType));
+                            var itemAttributeValue = items[i].getAttribute('data-' + filterType);
+                            if (itemAttributeValue in uniqueCounts) {
+                                uniqueCounts[itemAttributeValue]++;
+                            } else {
+                                uniqueCounts[itemAttributeValue] = 1;
+                            }
+                            foundItems.push(itemAttributeValue);
                         }
-                        foundItems = foundItems.filter(function (value, index, self) {
+                        var uniqueFoundItems = foundItems.filter(function (value, index, self) {
                             return self.indexOf(value) === index;
                         });
-                        for (var i = 0; i < foundItems.length; i++) {
+                        for (var i = 0; i < uniqueFoundItems.length; i++) {
                             var newOpt = document.createElement('option');
-                            newOpt.value = foundItems[i];
-                            newOpt.innerHTML = foundItems[i];
+                            newOpt.value = uniqueFoundItems[i];
+                            newOpt.innerHTML = uniqueFoundItems[i] + ' (' + uniqueCounts[uniqueFoundItems[i]] + ')';
                             itemToApplyClickHandlerTo.appendChild(newOpt);
                         }
 
