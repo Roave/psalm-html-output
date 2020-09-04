@@ -57,6 +57,9 @@ Psalm XML to HTML renderer
                 </style>
             </head>
             <body>
+                <section>
+                    <h1>Total violations: <xsl:value-of select="count(//report/item)" /></h1>
+                </section>
                 <form>
                     <label>
                         <select class="filterable" data-filter-type="severity">
@@ -108,16 +111,23 @@ Psalm XML to HTML renderer
                         var foundItems = [];
                         var filterType = itemToApplyClickHandlerTo.getAttribute('data-filter-type');
                         var items = document.querySelectorAll('#psalmErrors > li');
+                        var uniqueCounts = [];
                         for (var i = 0; i < items.length; i++) {
-                            foundItems.push(items[i].getAttribute('data-' + filterType));
+                            var itemAttributeValue = items[i].getAttribute('data-' + filterType);
+                            if (itemAttributeValue in uniqueCounts) {
+                                uniqueCounts[itemAttributeValue]++;
+                            } else {
+                                uniqueCounts[itemAttributeValue] = 1;
+                            }
+                            foundItems.push(itemAttributeValue);
                         }
-                        foundItems = foundItems.filter(function (value, index, self) {
+                        var uniqueFoundItems = foundItems.filter(function (value, index, self) {
                             return self.indexOf(value) === index;
                         });
-                        for (var i = 0; i < foundItems.length; i++) {
+                        for (var i = 0; i < uniqueFoundItems.length; i++) {
                             var newOpt = document.createElement('option');
-                            newOpt.value = foundItems[i];
-                            newOpt.innerHTML = foundItems[i];
+                            newOpt.value = uniqueFoundItems[i];
+                            newOpt.innerHTML = uniqueFoundItems[i] + ' (' + uniqueCounts[uniqueFoundItems[i]] + ')';
                             itemToApplyClickHandlerTo.appendChild(newOpt);
                         }
 
