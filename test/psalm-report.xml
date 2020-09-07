@@ -2,6 +2,27 @@
 <report>
     <item>
         <severity>error</severity>
+        <line_from>94</line_from>
+        <line_to>94</line_to>
+        <type>MixedArrayAccess</type>
+        <message>Cannot access array value on mixed variable $transaction</message>
+        <file_name>tests/src/SomeTest.php</file_name>
+        <file_path>/full/path/to/project/tests/src/SomeTest.php</file_path>
+        <snippet>            $this-&gt;assertSame('http://example.com/EchoTest', (string) $transaction['request']-&gt;getUri());</snippet>
+        <selected_text>$transaction['request']</selected_text>
+        <from>2307</from>
+        <to>2330</to>
+        <snippet_from>2237</snippet_from>
+        <snippet_to>2342</snippet_to>
+        <column_from>71</column_from>
+        <column_to>94</column_to>
+        <error_level>1</error_level>
+        <shortcode>51</shortcode>
+        <link>https://psalm.dev/051</link>
+        <taint_trace></taint_trace>
+    </item>
+    <item>
+        <severity>error</severity>
         <line_from>18</line_from>
         <line_to>18</line_to>
         <type>InvalidScalarArgument</type>
@@ -16,6 +37,10 @@
         <snippet_to>402</snippet_to>
         <column_from>29</column_from>
         <column_to>37</column_to>
+        <error_level>1</error_level>
+        <shortcode>51</shortcode>
+        <link>https://psalm.dev/051</link>
+        <taint_trace></taint_trace>
     </item>
     <item>
         <severity>error</severity>
@@ -41,5 +66,9 @@
         <snippet_to>830</snippet_to>
         <column_from>25</column_from>
         <column_to>10</column_to>
+        <error_level>1</error_level>
+        <shortcode>51</shortcode>
+        <link>https://psalm.dev/051</link>
+        <taint_trace></taint_trace>
     </item>
 </report>
