@@ -47,8 +47,17 @@
                 </style>
 </head>
 <body>
-<section><h1>Total violations: 2</h1></section><form><label><select class="filterable" data-filter-type="severity"><option value="">-- show all --</option></select><select class="filterable" data-filter-type="psalm-type"><option value="">-- show all --</option></select></label></form>
+<section><h1>Total violations: 3</h1></section><form><label><select class="filterable" data-filter-type="severity"><option value="">-- show all --</option></select><select class="filterable" data-filter-type="psalm-type"><option value="">-- show all --</option></select></label></form>
 <ul id="psalmErrors">
+    <li data-severity="error" data-psalm-type="MixedArrayAccess">
+<h3>tests/src/SomeTest.php:94</h3>
+<ul class="tags">
+<li class="severity error">error</li>
+<li>MixedArrayAccess</li>
+</ul>
+<p>Cannot access array value on mixed variable $transaction</p>
+<pre data-start="94" class="line-numbersx"><code class="language-php">            $this-&gt;assertSame('http://example.com/EchoTest', (string) /**##(##**/$transaction['request']/**##)##**/-&gt;getUri());</code></pre>
+</li>
     <li data-severity="error" data-psalm-type="InvalidScalarArgument">
 <h3>src/Reflector/Exception/IdentifierNotFound.php:18</h3>
 <ul class="tags">
@@ -74,6 +83,11 @@
 </ul>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/components/prism-markup-templating.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/components/prism-php.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script type="text/javascript">
                 
+                    Prism.hooks.add('before-highlight', function (env) {
+                        // Replace "//" temporarily inside strings as it seems to confuse Prism and causes some
+                        // /** comments later in the line to be treated as operators instead of comments
+                        env.code = env.code.replace(/('[^']*)\/\/([^']*')/gs, '$1/**/**/$2');
+                    })
                     Prism.hooks.add('before-insert', function(env) {
                         const magicTagMatch = /\/\*\*##\(##\*\*\/([\w\W]*)\/\*\*##\)##\*\*\//gs;
                         const matchedCodeToBecomeRed = magicTagMatch.exec(env.highlightedCode);
@@ -85,7 +99,9 @@
 
                         codeToBecomeRed = '<span class="psalm-errored-code">' + codeToBecomeRed + '</span>';
 
-                        env.highlightedCode = env.highlightedCode.replace(magicTagMatch, codeToBecomeRed);
+                        env.highlightedCode = env.highlightedCode
+                                .replace(magicTagMatch, codeToBecomeRed)
+                                .replace(/\/\*\*\/\*\*\//gs, '//');
                     });
                     function subtractUnmatchedItems(filterType, filterValue) {
                         var items = document.querySelectorAll('#psalmErrors > li');

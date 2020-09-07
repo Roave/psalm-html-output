@@ -81,6 +81,11 @@ Psalm XML to HTML renderer
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/line-numbers/prism-line-numbers.min.js" />
                 <script type="text/javascript">
                 <![CDATA[
+                    Prism.hooks.add('before-highlight', function (env) {
+                        // Replace "//" temporarily inside strings as it seems to confuse Prism and causes some
+                        // /** comments later in the line to be treated as operators instead of comments
+                        env.code = env.code.replace(/('[^']*)\/\/([^']*')/gs, '$1/**/**/$2');
+                    })
                     Prism.hooks.add('before-insert', function(env) {
                         const magicTagMatch = /\/\*\*##\(##\*\*\/([\w\W]*)\/\*\*##\)##\*\*\//gs;
                         const matchedCodeToBecomeRed = magicTagMatch.exec(env.highlightedCode);
@@ -92,7 +97,9 @@ Psalm XML to HTML renderer
 
                         codeToBecomeRed = '<span class="psalm-errored-code">' + codeToBecomeRed + '</span>';
 
-                        env.highlightedCode = env.highlightedCode.replace(magicTagMatch, codeToBecomeRed);
+                        env.highlightedCode = env.highlightedCode
+                                .replace(magicTagMatch, codeToBecomeRed)
+                                .replace(/\/\*\*\/\*\*\//gs, '//');
                     });
                     function subtractUnmatchedItems(filterType, filterValue) {
                         var items = document.querySelectorAll('#psalmErrors > li');
