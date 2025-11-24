@@ -44,6 +44,9 @@
                     ul#psalmErrors li.hidden {
                         display: none;
                     }
+                    a, a:visited {
+                        color: #943b3a;
+                    }                    
                 </style>
 </head>
 <body>
@@ -57,6 +60,7 @@
 </ul>
 <p>Cannot access array value on mixed variable $transaction</p>
 <pre data-start="94" class="line-numbersx"><code class="language-php">            $this-&gt;assertSame('http://example.com/EchoTest', (string) /**##(##**/$transaction['request']/**##)##**/-&gt;getUri());</code></pre>
+<small><a target="_blank" href="https://psalm.dev/051">Psalm #51</a></small>
 </li>
     <li data-severity="error" data-psalm-type="InvalidScalarArgument">
 <h3>src/Reflector/Exception/IdentifierNotFound.php:18</h3>
@@ -66,6 +70,7 @@
 </ul>
 <p>Argument 1 of __construct expects string, int provided</p>
 <pre data-start="18" class="line-numbersx"><code class="language-php">        parent::__construct(/**##(##**/$message/**##)##**/);</code></pre>
+<small><a target="_blank" href="https://psalm.dev/051">Psalm #51</a></small>
 </li>
     <li data-severity="error" data-psalm-type="InvalidScalarArgument">
 <h3>src/Reflector/Exception/IdentifierNotFound.php:30</h3>
@@ -79,6 +84,7 @@
             $identifier-&gt;getType()-&gt;getName(),
             $identifier-&gt;getName()
          /**##)##**/   ), $identifier);</code></pre>
+<small><a target="_blank" href="https://psalm.dev/051">Psalm #51</a></small>
 </li>
 </ul>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/components/prism-markup-templating.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/components/prism-php.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/plugins/line-numbers/prism-line-numbers.min.js"></script><script type="text/javascript">

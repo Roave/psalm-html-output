@@ -54,6 +54,9 @@ Psalm XML to HTML renderer
                     ul#psalmErrors li.hidden {
                         display: none;
                     }
+                    a, a:visited {
+                        color: #943b3a;
+                    }                    
                 </style>
             </head>
             <body>
@@ -172,6 +175,7 @@ Psalm XML to HTML renderer
             <pre data-start='{line_from}' class="line-numbersx">
                 <code class="language-php"><xsl:value-of select="substring(snippet, 0, from - snippet_from + 1)" />/**##(##**/<xsl:value-of select="substring(snippet, from - snippet_from + 1, to - from)" />/**##)##**/<xsl:value-of select="substring(snippet, to - snippet_from + 1)" /></code>
             </pre>
+            <small><a target="_blank" href="{link}">Psalm #<xsl:value-of select="shortcode"/></a></small>
         </li>
     </xsl:template>
 </xsl:stylesheet>
